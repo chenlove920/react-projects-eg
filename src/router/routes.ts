@@ -3,6 +3,7 @@ import Home from "../pages/test/Home";
 import Test1 from "../pages/test/Test1";
 import Test2 from "../pages/test/Test2";
 import About from "../pages/test/About";
+import Teststore from "../pages/test/Teststore";
 export default  createBrowserRouter([
     {
         path:'/',
@@ -21,6 +22,10 @@ export default  createBrowserRouter([
     {
         path:'about',
         Component:About
+    },
+    {
+        path:'teststore',
+        Component: Teststore
     }
 ])
 

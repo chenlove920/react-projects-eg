@@ -11,6 +11,7 @@ export default () => {
             </div>
             <div>
                 <Link to="about">about</Link>
+                 <Link to="teststore">store测试</Link>
             </div>
         </>
     )
