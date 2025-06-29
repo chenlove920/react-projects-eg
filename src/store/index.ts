@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import testStoreReducer from './modules/testStore'
+import billReducer from './modules/billStore'
 
 const store = configureStore({
     reducer: {
-        testStore: testStoreReducer
+        bill: billReducer
     }
 })
 

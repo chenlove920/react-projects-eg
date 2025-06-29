@@ -1,6 +1,15 @@
 import { Outlet } from "react-router-dom"
+import { useEffect } from "react"
 
-export default () => {
+import { useAppDispatch } from "../../store/hooks"
+import { getBillList } from "../../store/modules/billStore"
+
+const Layout =  () => {
+    const dispatch = useAppDispatch()
+    useEffect(() => {
+        dispatch(getBillList())
+    }, [dispatch])
+
     return (
         <>
             <div>lyaout</div>
@@ -8,3 +17,4 @@ export default () => {
         </>
     )
 }
+export default Layout
