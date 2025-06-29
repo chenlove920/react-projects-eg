@@ -8,3 +8,17 @@ npm i @reduxjs/toolkit react-redux react-router-dom
 
 1. Redux状态管理 -  @reduxjs/toolkit  react-redux
 2. 路由 - react-router-dom
+
+## react版本变更
+
+antd-mobile原因，react19->react18
+
+npm install react@18 react-dom@18
+
+>
+额外插件引入
+
+1. 时间处理 - dayjs
+2. class类名处理 - classnames
+3. 移动端组件库 - antd-mobile
+4. 请求插件 - axios
