@@ -1,4 +1,24 @@
 {
+    "tabs": [
+        {
+            "key": "/",
+            "title": "月度账单",
+            "icon": "BillOutline",
+            "active": true
+        },
+        {
+            "key": "/new",
+            "title": "记账",
+            "icon": "AddCircleOutline",
+            "active": false
+        },
+        {
+            "key": "/year",
+            "title": "年度账单",
+            "icon": "CalculatorOutline",
+            "active": false
+        }
+    ],
     "test": [
         {
             "name": 1,
