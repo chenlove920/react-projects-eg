@@ -22,3 +22,8 @@ npm install react@18 react-dom@18
 2. class类名处理 - classnames
 3. 移动端组件库 - antd-mobile
 4. 请求插件 - axios
+
+## mock服务器搭建 json-server
+
+npm i json-server
+npm run dbserver
