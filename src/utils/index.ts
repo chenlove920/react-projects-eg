@@ -13,6 +13,8 @@ export const createComponentsByname = (name: string) => React.createElement((ICO
 // new date时间格式化
 export const formatDate = (date: Date, format: string) => dayjs(date).format(format)
 
+export const formatDateYYYY= (date: Date) => formatDate(date, 'YYYY') 
+
 export const formatDateYYYYMM = (date: Date) => formatDate(date, 'YYYY-MM')
 
 export const formatDateYYYYMMDD = (date: Date) => formatDate(date, 'YYYY-MM-DD')
