@@ -2,8 +2,10 @@ import { useEffect, useMemo, useState } from 'react'
 import { NavBar, DatePicker } from 'antd-mobile'
 import classNames from 'classnames'
 import lodash from 'lodash'
-import { formatDate } from '../../utils'
+import { clacBillListByDate, formatDateYYYYMM, formatDateYYYYMMDD } from '../../utils'
 import { useAppSelector } from '../../store/hooks'
+
+import DailyBill from '../../conponents/DayBill'
 
 import './index.scss'
 import { BillListType } from '../../types/bill'
@@ -11,39 +13,40 @@ import { BillListType } from '../../types/bill'
 const Month = () => {
     // 按月分组数据
     const { billList } = useAppSelector(state => state.bill)
-    const monthGroup = useMemo(() => lodash.groupBy(billList, (item) => formatDate(item.date)), [billList])
+    const monthGroup = useMemo(() => lodash.groupBy(billList, (item) => formatDateYYYYMM(item.date)), [billList])
 
     // 控制弹窗
     const [dateVisible, setDateVisible] = useState(false)
     // 控制时间
-    const [currentDate, setCurrentDate] = useState(() => formatDate(new Date()))
+    const [currentDate, setCurrentDate] = useState(() => formatDateYYYYMM(new Date()))
     // 当前月份的数据
     const [currentMonthList, setCurrentMonthList] = useState<BillListType[]>([])
-    // 当前页的统计
-    const { pay, income, total } = useMemo(() => {
-        // 支出
-        const pay = currentMonthList.filter(item => item.type === 'pay').reduce((money, item) => money + item.money, 0)
-        // 收入
-        const income = currentMonthList.filter(item => item.type === 'income').reduce((money, item) => money + item.money, 0)
-        //结余
-        const total = pay + income
-        return {
-            pay,
-            income,
-            total
-        }
-    }, [currentMonthList])
+    // 当前月的统计
+    const { pay, income, total } = useMemo(() => clacBillListByDate(currentMonthList), [currentMonthList])
     // 初始化页面统计
-    useEffect(()=> {
-        const nowDate = formatDate(new Date)
+    useEffect(() => {
+        const nowDate = formatDateYYYYMM(new Date)
         setCurrentMonthList(monthGroup[nowDate] ?? [])
     }, [monthGroup])
+    // 当前月按日分组
+    const {
+        dayGroup,
+        dayKeys
+    } = useMemo(() => {
+        const dayGroup = lodash.groupBy(currentMonthList, (item) => formatDateYYYYMMDD(item.date))
+        const dayKeys = Object.keys(dayGroup)
+        return {
+            dayGroup,
+            dayKeys
+        }
+    }, [currentMonthList])
+
     // 切换时间层
     const changeDateVisiable = (status: boolean) => setDateVisible(status)
 
     // 确认按钮
     const confirmDate = (date: Date, status: boolean) => {
-        const newDate = formatDate(date)
+        const newDate = formatDateYYYYMM(date)
         setCurrentDate(newDate)
         changeDateVisiable(status)
         setCurrentMonthList(monthGroup[newDate] ?? [])
@@ -91,6 +94,8 @@ const Month = () => {
                         max={new Date()}
                     />
                 </div>
+                {/* 当前月统计数据 */}
+                {dayKeys.map((key, index) => <DailyBill date={key} billList={dayGroup[key]} key={index} ></DailyBill>)}
             </div>
         </div >
     )

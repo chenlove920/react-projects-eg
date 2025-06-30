@@ -8,3 +8,8 @@ export interface BillListType {
     date: Date,
     useFor: string,
 }
+
+export interface DayBillType {
+    date: string,
+    billList: BillListType[]
+}
