@@ -115,21 +115,21 @@
             "type": "income",
             "money": 50,
             "date": "2025-06-03T11:14:56.036Z",
-            "useFor": "food",
+            "useFor": "salary",
             "id": 21
         },
         {
             "type": "pay",
             "money": -10,
             "date": "2025-07-03T11:14:56.036Z",
-            "useFor": "food",
+            "useFor": "drinks",
             "id": 22
         },
         {
             "type": "income",
             "money": 50,
             "date": "2025-07-03T11:14:56.036Z",
-            "useFor": "food",
+            "useFor": "salary",
             "id": 23
         }
     ]
