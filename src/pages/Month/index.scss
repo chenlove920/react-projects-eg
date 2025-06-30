@@ -20,7 +20,7 @@
     }
 
     .content {
-        height: 573px;
+        height: calc(100% - $tabbar_height);
         padding: 0 10px;
         overflow-y: scroll;
         -ms-overflow-style: none;

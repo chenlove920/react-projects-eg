@@ -1,19 +1,22 @@
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import classNames from 'classnames'
 import './index.scss'
 import { DayBillType } from '../../types/bill'
 import { clacBillListByDate } from '../../utils'
+import { billTypeToName } from '../../contants/billList'
 
 const DailyBill = (props: DayBillType) => {
   const { date, billList } = props
+  const [show, setShow] = useState(false)
   // 当前页的统计
   const { pay, income, total } = useMemo(() => clacBillListByDate(billList), [billList])
+  const changeBillListStatus = (show: boolean) => setShow(show)
   return (
     <div className={classNames('dailyBill')}>
-      <div className="header">
+      <div className="header" onClick={() => changeBillListStatus(!show)}>
         <div className="dateIcon">
           <span className="date">{date}</span>
-          <span className={classNames('arrow')}></span>
+          <span className={classNames('arrow', show && "expand")}></span>
         </div>
         <div className="oneLineOverview">
           <div className="pay">
@@ -30,6 +33,23 @@ const DailyBill = (props: DayBillType) => {
           </div>
         </div>
       </div>
+      {/* 单日列表 */}
+      {
+        show && <div className="billList">
+          {billList.map(item => {
+            return (
+              <div className="bill" key={item.id}>
+                <div className="detail">
+                  <div className="billType">{billTypeToName(item.useFor)}</div>
+                </div>
+                <div className={classNames('money', item.type)}>
+                  {item.money.toFixed(2)}
+                </div>
+              </div>
+            )
+          })}
+        </div>
+      }
     </div>
   )
 }
