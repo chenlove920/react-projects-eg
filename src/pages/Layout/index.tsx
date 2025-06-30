@@ -25,7 +25,6 @@ const Layout = () => {
     return (
         <div className="kaLayout">
             <div className="page">
-                <div>layout</div>
                 {/* 二级路由出口 */}
                 <Outlet />
             </div>
