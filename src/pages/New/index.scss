@@ -1,3 +1,5 @@
+@use '../css/default';
+
 .keepAccounts {
     --ka-bg-color: #daf2e1;
     --ka-color: #69ae78;
@@ -21,7 +23,7 @@
     }
 
     .header {
-        height: 132px;
+        height: default.$new_header_height;
 
         .kaType {
             padding: 9px 0;
@@ -96,9 +98,8 @@
     .container {}
 
     .kaTypeList {
-        height: 490px;
+        height: calc(100% - default.$tabbar_height - default.$new_header_height - default.$new_btn_height);
         padding: 20px 11px;
-        padding-bottom: 70px;
         overflow-y: scroll;
         background: #ffffff;
         border-radius: 20px 20px 0 0;

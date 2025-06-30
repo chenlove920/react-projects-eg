@@ -23,12 +23,13 @@ const Layout = () => {
     }, [dispatch])
 
     return (
-        <div className="kaLayout">
-            <div className="page">
-                {/* 二级路由出口 */}
-                <Outlet />
+        <>
+            <div className="kaLayout">
+                <div className="page">
+                    {/* 二级路由出口 */}
+                    <Outlet />
+                </div>
             </div>
-
             <TabBar
                 className="tabbar"
                 activeKey={location.pathname}
@@ -39,7 +40,7 @@ const Layout = () => {
                     <TabBar.Item key={item.key} icon={() => createComponentsByname(item.icon)} title={item.title} />
                 ))}
             </TabBar>
-        </div>
+        </>
     )
 }
 export default Layout

@@ -1,27 +1,37 @@
-@import "../css/default.scss";
-html,body,#root {
+@use "../css/default";
+
+* {
+  margin: 0;
+  padding: 0;
+}
+html,
+body,
+#root {
   height: 100%;
 }
+
 .kaLayout {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: calc(100% - default.$tabbar_height);
   overflow: hidden;
-
   .page {
     height: 100%;
   }
+}
 
-  .tabbar {
-    height: $tabbar_height;
-    padding-bottom: 10px;
-    .adm-tab-bar-item {
-      color: #888c98;
-    }
+.tabbar {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  height: default.$tabbar_height;
+  background-color: white;
+  .adm-tab-bar-item {
+    color: #888c98;
+  }
 
-    .adm-tab-bar-item-active {
-      color: rgb(105, 174, 120);
-    }
+  .adm-tab-bar-item-active {
+    color: rgb(105, 174, 120);
   }
 }
 

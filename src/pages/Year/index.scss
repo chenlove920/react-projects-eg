@@ -1,4 +1,4 @@
-@import "../css/default.scss";
+@use "../css/default";
 
 .monthlyBill {
     --ka-text-color: #191d26;
@@ -20,7 +20,7 @@
     }
 
     .content {
-        height: calc(100% - $tabbar_height);
+        height: calc(100% - default.$tabbar_height);
         padding: 0 10px;
         overflow-y: scroll;
         -ms-overflow-style: none;
