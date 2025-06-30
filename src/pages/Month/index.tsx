@@ -9,8 +9,10 @@ import DailyBill from '../../conponents/DayBill'
 
 import './index.scss'
 import { BillListType } from '../../types/bill'
+import { useNavigate } from 'react-router-dom'
 
 const Month = () => {
+    const navigate = useNavigate()
     // 按月分组数据
     const { billList } = useAppSelector(state => state.bill)
     const monthGroup = useMemo(() => lodash.groupBy(billList, (item) => formatDateYYYYMM(item.date)), [billList])
@@ -54,7 +56,7 @@ const Month = () => {
 
     return (
         <div className="monthlyBill">
-            <NavBar className="nav" >
+            <NavBar className="nav" onBack={() => navigate(-1)}>
                 月度收支
             </NavBar>
             <div className="content">
