@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { NavBar, DatePicker } from 'antd-mobile'
 import classNames from 'classnames'
 import lodash from 'lodash'
@@ -11,19 +11,15 @@ import { BillListType } from '../../types/bill'
 const Month = () => {
     // 按月分组数据
     const { billList } = useAppSelector(state => state.bill)
-    const monthGroup = useMemo(() => {
-        return lodash.groupBy(billList, (item) => formatDate(item.date))
-    }, [billList])
-
-
+    const monthGroup = useMemo(() => lodash.groupBy(billList, (item) => formatDate(item.date)), [billList])
 
     // 控制弹窗
     const [dateVisible, setDateVisible] = useState(false)
     // 控制时间
     const [currentDate, setCurrentDate] = useState(() => formatDate(new Date()))
-    // 
+    // 当前月份的数据
     const [currentMonthList, setCurrentMonthList] = useState<BillListType[]>([])
-
+    // 当前页的统计
     const { pay, income, total } = useMemo(() => {
         // 支出
         const pay = currentMonthList.filter(item => item.type === 'pay').reduce((money, item) => money + item.money, 0)
@@ -37,9 +33,11 @@ const Month = () => {
             total
         }
     }, [currentMonthList])
-
-
-
+    // 初始化页面统计
+    useEffect(()=> {
+        const nowDate = formatDate(new Date)
+        setCurrentMonthList(monthGroup[nowDate] ?? [])
+    }, [monthGroup])
     // 切换时间层
     const changeDateVisiable = (status: boolean) => setDateVisible(status)
 
@@ -48,9 +46,9 @@ const Month = () => {
         const newDate = formatDate(date)
         setCurrentDate(newDate)
         changeDateVisiable(status)
-        const currList = monthGroup[newDate] ?? []
-        setCurrentMonthList(currList)
+        setCurrentMonthList(monthGroup[newDate] ?? [])
     }
+
     return (
         <div className="monthlyBill">
             <NavBar className="nav" >
