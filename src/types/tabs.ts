@@ -1,8 +1,8 @@
-export interface TabsListType {
-    tabsList: TabsType[],
+export interface TabsStoreType {
+    tabsList: TabsListType[],
     activeIndex: string
 }
-export interface TabsType {
+export interface TabsListType {
     key: string,
     title: string,
     icon: string,

@@ -3,13 +3,13 @@ import { createSlice } from "@reduxjs/toolkit";
 import axios from 'axios'
 import { AppDispatch } from "..";
 import { TABSURL } from "../API";
-import { TabsListType } from "../../types/tabs";
+import { TabsStoreType } from "../../types/tabs";
 const tabsStore = createSlice({
     name: 'tabsStore',
     initialState: {
         tabsList: [],
         activeIndex: "/"
-    } as TabsListType,
+    } as TabsStoreType,
     reducers: {
         setTabsList(state, action) {
             state.tabsList = action.payload
