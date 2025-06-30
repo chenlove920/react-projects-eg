@@ -1,0 +1,10 @@
+export interface BillStoreType {
+    billList: BillListType[]
+}
+export interface BillListType {
+    id: number,
+    type: string,
+    money: number,
+    date: Date,
+    useFor: string,
+}

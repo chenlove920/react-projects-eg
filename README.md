@@ -27,3 +27,7 @@ npm install react@18 react-dom@18
 
 npm i json-server
 npm run dbserver
+
+## 数据分组lodash
+
+npm i lodash

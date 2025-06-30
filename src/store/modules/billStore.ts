@@ -2,11 +2,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from 'axios'
 import { AppDispatch } from "..";
+import { BILLLISTURL } from "../API";
+import { BillStoreType } from "../../types/bill";
+
 const billStore = createSlice({
     name: 'billStore',
     initialState: {
         billList: []
-    },
+    } as BillStoreType,
     reducers: {
         setBillList(state, action) {
             state.billList = action.payload
@@ -18,9 +21,8 @@ const billStore = createSlice({
 const { setBillList } = billStore.actions
 
 const getBillList = () => {
-    const URL = "http://localhost:3004/test"
     return async (dispatch: AppDispatch) => {
-        const res = await axios.get(URL)
+        const res = await axios.get(BILLLISTURL)
         dispatch(setBillList(res.data))
     }
 }
