@@ -8,6 +8,12 @@ export interface BillListType {
     date: Date,
     useFor: string,
 }
+export interface SubBillListType {
+    type: string,
+    money: number,
+    date: string,
+    useFor: string,
+}
 
 export interface DayBillType {
     date: string,

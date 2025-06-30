@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import axios from 'axios'
 import { AppDispatch } from "..";
 import { BILLLISTURL } from "../API";
-import { BillStoreType } from "../../types/bill";
+import { BillStoreType, SubBillListType } from "../../types/bill";
 
 const billStore = createSlice({
     name: 'billStore',
@@ -13,12 +13,23 @@ const billStore = createSlice({
     reducers: {
         setBillList(state, action) {
             state.billList = action.payload
+        },
+        addBill(state, action) {
+            state.billList.push(action.payload)
         }
     }
 })
 
 // 结构actionCreater函数
-const { setBillList } = billStore.actions
+const { setBillList, addBill } = billStore.actions
+
+// 记一笔
+const createBill = (data: SubBillListType) => {
+    return async (dispatch: AppDispatch) => {
+        const res = await axios.post(BILLLISTURL, data)
+        dispatch(addBill(res.data))
+    }
+}
 
 const getBillList = () => {
     return async (dispatch: AppDispatch) => {
@@ -27,7 +38,7 @@ const getBillList = () => {
     }
 }
 
-export { getBillList }
+export { getBillList, createBill }
 // 导出reducer
 export default billStore.reducer
 

@@ -17,6 +17,8 @@ export const formatDateYYYYMM = (date: Date) => formatDate(date, 'YYYY-MM')
 
 export const formatDateYYYYMMDD = (date: Date) => formatDate(date, 'YYYY-MM-DD')
 
+export const formatDateYYYYMMDDHHmmss = (date: Date) => formatDate(date, 'YYYY-MM-DD HH:mm:ss')
+
 // 计算支出，收入，结余
 export const clacBillListByDate= (currentMonthList:BillListType[]) => {
     // 支出
