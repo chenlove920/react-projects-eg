@@ -4,6 +4,7 @@ import './index.scss'
 import { DayBillType } from '../../types/bill'
 import { clacBillListByDate } from '../../utils'
 import { billTypeToName } from '../../contants/billList'
+import Icon from '../Icon'
 
 const DailyBill = (props: DayBillType) => {
   const { date, billList } = props
@@ -39,6 +40,8 @@ const DailyBill = (props: DayBillType) => {
           {billList.map(item => {
             return (
               <div className="bill" key={item.id}>
+                {/* 图标 */}
+                <Icon type={item.useFor}></Icon>
                 <div className="detail">
                   <div className="billType">{billTypeToName(item.useFor)}</div>
                 </div>
