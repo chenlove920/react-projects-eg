@@ -95,7 +95,7 @@ const Month = () => {
                     />
                 </div>
                 {/* 当前月统计数据 */}
-                {dayKeys.map((key, index) => <DailyBill date={key} billList={dayGroup[key]} key={index} ></DailyBill>)}
+                {dayKeys.map(key => <DailyBill date={key} billList={dayGroup[key]} key={key} ></DailyBill>)}
             </div>
         </div >
     )
