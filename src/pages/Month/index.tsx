@@ -6,23 +6,50 @@ import { formatDate } from '../../utils'
 import { useAppSelector } from '../../store/hooks'
 
 import './index.scss'
+import { BillListType } from '../../types/bill'
 
 const Month = () => {
     // 按月分组数据
-    const {billList} = useAppSelector(state => state.bill)
-    const monthGroup = useMemo(()=> {
-        return lodash.groupBy(billList, (item)=>formatDate(item.date) )
+    const { billList } = useAppSelector(state => state.bill)
+    const monthGroup = useMemo(() => {
+        return lodash.groupBy(billList, (item) => formatDate(item.date))
     }, [billList])
-    
+
+
+
     // 控制弹窗
     const [dateVisible, setDateVisible] = useState(false)
     // 控制时间
     const [currentDate, setCurrentDate] = useState(() => formatDate(new Date()))
+    // 
+    const [currentMonthList, setCurrentMonthList] = useState<BillListType[]>([])
 
+    const { pay, income, total } = useMemo(() => {
+        // 支出
+        const pay = currentMonthList.filter(item => item.type === 'pay').reduce((money, item) => money + item.money, 0)
+        // 收入
+        const income = currentMonthList.filter(item => item.type === 'income').reduce((money, item) => money + item.money, 0)
+        //结余
+        const total = pay + income
+        return {
+            pay,
+            income,
+            total
+        }
+    }, [currentMonthList])
+
+
+
+    // 切换时间层
     const changeDateVisiable = (status: boolean) => setDateVisible(status)
+
+    // 确认按钮
     const confirmDate = (date: Date, status: boolean) => {
-        setCurrentDate(formatDate(date))
+        const newDate = formatDate(date)
+        setCurrentDate(newDate)
         changeDateVisiable(status)
+        const currList = monthGroup[newDate] ?? []
+        setCurrentMonthList(currList)
     }
     return (
         <div className="monthlyBill">
@@ -42,15 +69,15 @@ const Month = () => {
                     {/* 统计区域 */}
                     <div className='twoLineOverview'>
                         <div className="item">
-                            <span className="money">{100}</span>
+                            <span className="money">{pay}</span>
                             <span className="type">支出</span>
                         </div>
                         <div className="item">
-                            <span className="money">{200}</span>
+                            <span className="money">{income}</span>
                             <span className="type">收入</span>
                         </div>
                         <div className="item">
-                            <span className="money">{200}</span>
+                            <span className="money">{total}</span>
                             <span className="type">结余</span>
                         </div>
                     </div>
