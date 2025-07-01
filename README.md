@@ -31,3 +31,8 @@ npm run dbserver
 ## 数据分组lodash
 
 npm i lodash
+
+## 结尾
+
+服务器启动 npm run dbserver
+项目启动  npm start
