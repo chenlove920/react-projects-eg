@@ -2,7 +2,7 @@ import { Button, DatePicker, Input, NavBar } from 'antd-mobile'
 import { useNavigate } from 'react-router-dom'
 
 import classNames from 'classnames'
-import Icon from '../../conponents/Icon'
+import Icon from '../../components/Icon'
 import { billListData } from '../../contants/billList'
 
 import './index.scss'

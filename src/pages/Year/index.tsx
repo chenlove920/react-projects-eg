@@ -5,7 +5,7 @@ import lodash from 'lodash'
 import { clacBillListByDate, formatDateYYYY, formatDateYYYYMM } from '../../utils'
 import { useAppSelector } from '../../store/hooks'
 
-import DailyBill from '../../conponents/DayBill'
+import DailyBill from '../../components/DayBill'
 
 import './index.scss'
 import { BillListType } from '../../types/bill'
